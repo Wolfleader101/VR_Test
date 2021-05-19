@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -10,9 +11,14 @@ public class VRShoot : MonoBehaviour
 {
     [SerializeField] private InputActionReference shootAction;
     public InputActionReference ShootAction => shootAction;
+
+    [SerializeField] private Transform firePoint;
+    public Transform FirePoint => firePoint;
+
     public GameObject Bullet;
     private float _currentCooldown;
     Type _lastActiveType = null;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -25,8 +31,6 @@ public class VRShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 pos = transform.forward * 1.2f;
-        
         if (shootAction != null && shootAction.action != null && shootAction.action.enabled && shootAction.action.controls.Count > 0)
         {
 
@@ -40,10 +44,10 @@ public class VRShoot : MonoBehaviour
                 }
                 else if (_currentCooldown <= 0)
                 {
-                    GameObject newBullet = Instantiate(Bullet, pos, transform.rotation);
-                    var bullet_rb = newBullet.GetComponent<Rigidbody>();
-                    bullet_rb.AddForce(newBullet.transform.forward * 2);
-             
+                    GameObject newBullet = Instantiate(Bullet, firePoint.position, quaternion.identity);
+                    Vector3 shootDir = firePoint.forward;
+                    newBullet.GetComponent<Bullet>().Setup(shootDir);
+
                     _currentCooldown = 0.1f;
                 }
                 
