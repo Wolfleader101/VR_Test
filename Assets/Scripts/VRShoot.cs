@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.UIElements;
+
 
 public class VRShoot : MonoBehaviour
 {
@@ -17,7 +16,6 @@ public class VRShoot : MonoBehaviour
 
     public GameObject Bullet;
     private float _currentCooldown;
-    Type _lastActiveType = null;
     
     
     // Start is called before the first frame update
@@ -26,16 +24,11 @@ public class VRShoot : MonoBehaviour
         _currentCooldown = 0.1f;
     }
     
-
-    
     // Update is called once per frame
     void Update()
     {
         if (shootAction != null && shootAction.action != null && shootAction.action.enabled && shootAction.action.controls.Count > 0)
         {
-
-           // Type typeToUse = null;
-
             if (shootAction.action.activeControl != null)
             {
                 if (_currentCooldown > 0)
@@ -53,24 +46,6 @@ public class VRShoot : MonoBehaviour
                 
                 //typeToUse = shootAction.action.activeControl.valueType;
             }
-            // else
-            // {
-            //     typeToUse = _lastActiveType;
-            // }
-            //
-            // if(typeToUse == typeof(bool))
-            // {
-            //     _lastActiveType = typeof(bool);
-            //     bool value = shootAction.action.ReadValue<bool>();
-            //     Debug.Log("BOOL TEST");
-            // }
-            // else if(typeToUse == typeof(float))
-            // {
-            //     _lastActiveType = typeof(float);
-            //     float value = shootAction.action.ReadValue<float>();
-            //     if (value > 0.5)
-            //         Debug.Log("FLOAT TEST");
-            // }
         }
     }
 }
