@@ -928,8 +928,8 @@
                 },
                 {
                     "name": "",
-                    "id": "d088b14d-9d89-4e79-b321-3a62d929f7f2",
-                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "id": "77861137-9bc9-4f81-9dcd-272b7833136b",
+                    "path": "<XRController>{RightHand}/triggerButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",

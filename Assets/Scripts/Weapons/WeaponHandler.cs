@@ -7,6 +7,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private BaseWeapon weapon;
 
     public Transform firePoint;
+    public Transform casingPoint;
     
     private Vector3 direction;
 
@@ -35,6 +36,7 @@ public class WeaponHandler : MonoBehaviour
     public void Shoot()
     {
         Vector3 pos = firePoint.position;
+        Vector3 casingPos = casingPoint.position;
         
         if (_currentCooldown > 0)
         {
@@ -43,7 +45,7 @@ public class WeaponHandler : MonoBehaviour
         else if (_currentCooldown <= 0)
         {
             GameObject newBullet = Instantiate(weapon.BulletPrefab, pos, firePoint.rotation);
-            StartCoroutine(SpawnBulletCasing(pos));
+            StartCoroutine(SpawnBulletCasing(casingPos));
             Rigidbody bulletRb = newBullet.GetComponent<Rigidbody>();
             BulletHandler bulletHandler = newBullet.GetComponent<BulletHandler>();
             bulletRb.AddForce(direction * bulletHandler.Bullet.Speed, ForceMode.Impulse);
@@ -55,7 +57,8 @@ public class WeaponHandler : MonoBehaviour
     IEnumerator SpawnBulletCasing(Vector3 pos)
     {
         yield return new WaitForSeconds(0.2f);
-        GameObject newBulletCasing = Instantiate(weapon.BulletCasingPrefab, pos, firePoint.rotation);
+        GameObject newBulletCasing = Instantiate(weapon.BulletCasingPrefab, pos, casingPoint.rotation);
+        newBulletCasing.GetComponent<Rigidbody>().AddForce(casingPoint.up * 5, ForceMode.Impulse);
         StopCoroutine(SpawnBulletCasing(pos));
     }
 }

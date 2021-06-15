@@ -26,18 +26,11 @@ public class BulletHandler : MonoBehaviour
         // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    private void OnTriggerEnter(Collider hitInfo)
+    void OnCollisionEnter(Collision collision)
     {
-        if (hitInfo.GetComponent<BulletHandler>()) return;
-        //BaseEntity enemy = hitInfo.GetComponent<BaseEntity>();
-        //if (enemy == owner) return;
+        if (collision.gameObject.GetComponent<BulletHandler>()) return;
         
-        //if (enemy != null)
-        //{
-        //    enemy.TakeDamage(damage);
-
-        // }
         Destroy(this.gameObject);
-        
+
     }
 }
