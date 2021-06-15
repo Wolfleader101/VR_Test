@@ -15,7 +15,7 @@ public class BulletHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        //_rb = GetComponent<Rigidbody>();
         // rb.velocity = transform.right * bullet.Speed;
         Destroy(gameObject, bullet.DestroyTime);
     }
@@ -26,7 +26,7 @@ public class BulletHandler : MonoBehaviour
         // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    private void OnTriggerEnter2D(Collider2D hitInfo)
+    private void OnTriggerEnter(Collider hitInfo)
     {
         if (hitInfo.GetComponent<BulletHandler>()) return;
         //BaseEntity enemy = hitInfo.GetComponent<BaseEntity>();

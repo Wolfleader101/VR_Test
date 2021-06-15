@@ -13,4 +13,7 @@ public class BaseBullet : ScriptableObject
 
     [SerializeField] private float destroyTime = 8f;
     public float DestroyTime => destroyTime;
+    
+    [SerializeField] private float casingDestroyTime = 4f;
+    public float CasingDestroyTime => casingDestroyTime;
 }

@@ -43,11 +43,19 @@ public class WeaponHandler : MonoBehaviour
         else if (_currentCooldown <= 0)
         {
             GameObject newBullet = Instantiate(weapon.BulletPrefab, pos, firePoint.rotation);
+            StartCoroutine(SpawnBulletCasing(pos));
             Rigidbody bulletRb = newBullet.GetComponent<Rigidbody>();
-             BulletHandler bulletHandler = newBullet.GetComponent<BulletHandler>();
-             bulletRb.AddForce(direction * bulletHandler.Bullet.Speed, ForceMode.Impulse);
+            BulletHandler bulletHandler = newBullet.GetComponent<BulletHandler>();
+            bulletRb.AddForce(direction * bulletHandler.Bullet.Speed, ForceMode.Impulse);
 
              _currentCooldown = weapon.FireRate;
         }
+    }
+
+    IEnumerator SpawnBulletCasing(Vector3 pos)
+    {
+        yield return new WaitForSeconds(0.2f);
+        GameObject newBulletCasing = Instantiate(weapon.BulletCasingPrefab, pos, firePoint.rotation);
+        StopCoroutine(SpawnBulletCasing(pos));
     }
 }

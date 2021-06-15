@@ -16,3 +16,4 @@ MonoBehaviour:
   fireRate: 0.8
   reloadTime: 1.6
   bulletPrefab: {fileID: 1404200745246544, guid: 068381675912eb044a912de01e17f9cd, type: 3}
+  bulletCasingPrefab: {fileID: 1796443416058958, guid: 4cc480f6abf10b748bf5db36d1cd88aa, type: 3}

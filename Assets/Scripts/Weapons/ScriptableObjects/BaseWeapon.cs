@@ -16,5 +16,8 @@ public class BaseWeapon : ScriptableObject
 
     [SerializeField] private GameObject bulletPrefab;
     public GameObject BulletPrefab => bulletPrefab;
-    
+
+    [SerializeField] private GameObject bulletCasingPrefab; 
+    public GameObject BulletCasingPrefab => bulletCasingPrefab;
+
 }
