@@ -11,17 +11,14 @@ public class VRShoot : MonoBehaviour
     [SerializeField] private InputActionReference shootAction;
     public InputActionReference ShootAction => shootAction;
 
-    [SerializeField] private Transform firePoint;
-    public Transform FirePoint => firePoint;
-
-    public GameObject Bullet;
-    private float _currentCooldown;
+    [SerializeField] private WeaponHandler weapon;
+    public WeaponHandler Weapon => weapon;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        _currentCooldown = 0.1f;
+        weapon = this.GetComponentInChildren<WeaponHandler>();
     }
     
     // Update is called once per frame
@@ -31,19 +28,7 @@ public class VRShoot : MonoBehaviour
         {
             if (shootAction.action.activeControl != null)
             {
-                if (_currentCooldown > 0)
-                {
-                    _currentCooldown -= Time.deltaTime;
-                }
-                else if (_currentCooldown <= 0)
-                {
-                    GameObject newBullet = Instantiate(Bullet, firePoint.position, quaternion.identity);
-                    Vector3 shootDir = firePoint.forward;
-                    newBullet.GetComponent<Bullet>().Setup(shootDir);
-
-                    _currentCooldown = 0.1f;
-                }
-                
+                weapon.Shoot();
                 //typeToUse = shootAction.action.activeControl.valueType;
             }
         }
